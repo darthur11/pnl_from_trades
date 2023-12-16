@@ -1,3 +1,14 @@
+# Algorithm:
+# 1. Calculate amount signed, so that we can use it in the next steps. It's basically amount * side
+# 2. Calculate running balance. It's basically cumsum of amount signed
+# 3. Calculate lag running balance. It's basically lag of running balance
+# 4. Calculate amount liquidated.  It's basically min(abs(amount_signed), abs(lag_running_balance))
+# 5. Calculate flags. It's basically 1 if amount_signed * lag_running_balance < 0 else 0
+# 6. Calculate inventory metrics. It's basically running inventory, inventory cost, inventory change
+# 7. Calculate pnl. It's basically realized pnl, unrealized pnl for quote currency and USD
+# 8. Calculate totals. It's basically total pnl for each instrument
+# 9. Write to file.
+
 import json
 
 import numpy as np
@@ -5,6 +16,8 @@ import pandas as pd
 
 
 class PLCalculator:
+    """This class calculates P&L for a given input DataFrame.
+    """
     def __init__(self, input: pd.DataFrame):
         self.input = input
 
@@ -152,6 +165,7 @@ class PLCalculator:
                 "realized_pnl": realized_pnl,
                 "total_pnl": total_pnl,
             }
+        print(total_metrics)
         with open("total_metrics.json", "w") as f:
             json.dump(total_metrics, f)
 
