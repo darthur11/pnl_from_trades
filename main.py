@@ -1,9 +1,8 @@
-from reader import read_data
 from pl_calculator import PLCalculator
-from constants import BASE_COLUMNS
+from reader import read_data
 
-if __name__ == '__main__':
-    df = read_data('data.csv')
+if __name__ == "__main__":
+    df = read_data("data.csv")
     pl_calc = PLCalculator(df)
     pl_calc.calculate()
     pl_calc.calculate_totals()
