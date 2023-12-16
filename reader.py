@@ -1,6 +1,7 @@
 import pandas as pd
 
-def read_data(filename: str, delimiter = ';', thousands= ' ', decimal = ',') -> pd.DataFrame:
+
+def read_data(filename: str, delimiter=";", thousands=" ", decimal=",") -> pd.DataFrame:
     """This function reads data from a csv file and returns a pandas DataFrame
 
     Args:
@@ -12,4 +13,6 @@ def read_data(filename: str, delimiter = ';', thousands= ' ', decimal = ',') -> 
     Returns:
         pd.DataFrame: Pandas DataFrame
     """
-    return pd.read_csv(filename, delimiter=delimiter, thousands= thousands, decimal=decimal)
+    return pd.read_csv(
+        filename, delimiter=delimiter, thousands=thousands, decimal=decimal
+    )
